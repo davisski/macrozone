@@ -45,6 +45,7 @@ export default function AllMealsScreen() {
               protein={meal.protein}
               carbs={meal.carbs}
               fat={meal.fat}
+              type={meal.type}
               onDelete={loadMeals}
             />
           ))
