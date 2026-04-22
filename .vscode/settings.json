@@ -3,5 +3,18 @@
     "source.fixAll": "explicit",
     "source.organizeImports": "explicit",
     "source.sortMembers": "explicit"
+  },
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#f7c59f",
+    "titleBar.activeBackground": "#f7c59f",
+    "titleBar.activeForeground": "#00241b",
+    "titleBar.inactiveBackground": "#95470C",
+    "titleBar.inactiveForeground": "#FEFAF6",
+    "statusBar.background": "#95470C",
+    "statusBar.foreground": "#FEFAF6",
+    "statusBar.debuggingBackground": "#95470C",
+    "statusBar.debuggingForeground": "#FEFAF6",
+    "statusBar.noFolderBackground": "#95470C",
+    "statusBar.noFolderForeground": "#FEFAF6"
   }
 }

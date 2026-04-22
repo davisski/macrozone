@@ -39,6 +39,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "b497f3c8-815b-4792-a28a-fb1391b182ca"
+      }
+    },
+    "owner": "davisski"
   }
 }
