@@ -7,6 +7,7 @@ export type Meal = {
   protein: number;
   carbs: number;
   fat: number;
+  type: 'Breakfast' | 'Lunch' | 'Dinner' | 'Snack';
   createdAt: string;
 };
 

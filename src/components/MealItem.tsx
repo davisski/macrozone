@@ -13,6 +13,7 @@ type MealItemProps = {
   protein: number;
   carbs: number;
   fat: number;
+  type: string;
   onDelete: () => void;
 };
 
@@ -23,6 +24,7 @@ export default function MealItem({
   protein,
   carbs,
   fat,
+  type,
   onDelete,
 }: MealItemProps) {
 
@@ -46,7 +48,7 @@ export default function MealItem({
     <TouchableOpacity style={styles.container} onLongPress={handleLongPress}>
         <View style={{flex:1, flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
             <View style={{ flex: 1, flexFlow: 'column' }}>
-                <Text style={styles.name}>{name}</Text>
+                <Text style={styles.name}>{name} - {type}</Text>
 
                 <Text style={styles.macros}>
                     {calories} cal • {protein}g P • {carbs}g C • {fat}g F

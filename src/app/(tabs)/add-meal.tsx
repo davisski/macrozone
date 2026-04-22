@@ -2,6 +2,8 @@ import { addMeal, findMealById, updateMeal } from '@/storage/meals';
 import { colors, globalStyles } from '@/styles/global';
 import { useRouter, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import {  useCallback, useState } from 'react';
+import { Platform } from 'react-native';
+import {Picker} from '@react-native-picker/picker';
 import * as Haptics from 'expo-haptics';
 
 import {
@@ -21,7 +23,9 @@ export default function AddMealScreen() {
   const [fat, setFat] = useState('');
   const [meals, setMeals] = useState('');
   const { mealId } = useLocalSearchParams();
+  const [selectedType, setSelectedType] = useState(null);
   const isEditing = !!mealId && mealId !== 'null';
+  const TYPES = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
 
   const router = useRouter();
   const resetForm = () => {
@@ -30,6 +34,7 @@ export default function AddMealScreen() {
       setProtein('');
       setCarbs('');
       setFat('');
+      setSelectedType(null);
   }
   useFocusEffect(() => {
     resetForm();
@@ -43,11 +48,16 @@ export default function AddMealScreen() {
       setProtein(String(meal.protein));
       setCarbs(String(meal.carbs));
       setFat(String(meal.fat));
+      setSelectedType(meal.type);
     };
     loadMeal();
   });
 
   const handleMealUpdate = async () => {
+        if(!selectedType) {
+          Alert.alert('Error', 'Please select a meal type.');
+          return;
+       }
     if (name == '' || calories == '') {
       Alert.alert('Error', 'Please enter a meal name and calories.');
       return;
@@ -59,6 +69,7 @@ export default function AddMealScreen() {
         protein: Number(protein),
         carbs: Number(carbs),
         fat: Number(fat),
+        type: selectedType,
     });
 
     resetForm();
@@ -73,11 +84,16 @@ export default function AddMealScreen() {
   }
 
   const handleAddMeal = async () => {
-    if (name == '' || calories == '') {
-      Alert.alert('Error', 'Please enter a meal name and calories.');
-      return;
-    }
+     if(!selectedType) {
+         Alert.alert('Error', 'Please select a meal type.');
+         return;
+     }
+     if (name == '' || calories == '') {
+        Alert.alert('Error', 'Please enter a meal name and calories.');
+        return;
+     }
     await addMeal({
+      type:selectedType,
       name,
       calories: Number(calories),
       protein: Number(protein) || 0,
@@ -95,6 +111,36 @@ export default function AddMealScreen() {
   return (
     <View style={globalStyles.container}>
       <Text style={globalStyles.title}>{isEditing ? 'Edit Meal' : 'Add Meal'}</Text>
+
+        <View style={styles.dropdown.container}>
+              <View style={styles.dropdown.wrapper}>
+                <Picker
+                  selectedValue={selectedType}
+                  onValueChange={(val) => setSelectedType(val)}
+                  style={styles.dropdown.picker}
+                  itemStyle={styles.dropdown.item}
+                  dropdownIconColor="#a0a0a0"
+                  mode="dropdown"
+                >
+                <Picker.Item
+                  key='placeholder'
+                  label='Select meal type'
+                  value={null}
+                  style={styles.dropdown.item}
+                  color={Platform.OS === "android" ? "#a0a0b0" : undefined}
+                />
+                  {TYPES.map((opt) => (
+                    <Picker.Item
+                      key={opt}
+                      label={opt}
+                      value={opt}
+                      style={styles.dropdown.item}
+                      color={Platform.OS === "android" ? "#a0a0b0" : undefined}
+                    />
+                  ))}
+                </Picker>
+              </View>
+            </View>
 
       <TextInput
         style={styles.input}
@@ -174,5 +220,29 @@ const styles = StyleSheet.create({
     color: colors.background,
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  dropdown: {
+    container: {
+        backgroundColor: "#1a1a2e",
+    },
+    wrapper: {
+        backgroundColor: colors.surface,
+        borderRadius: 10,
+        marginTop: 16,
+        overflow: "hidden",
+        paddingLeft: 8,
+        paddingRight: 8,
+        color: colors.text,
+    },
+    item: {
+        color: colors.textSecondary,
+        backgroundColor: colors.surface,
+        fontSize: 16,
+    },
+    picker: {
+        color: colors.text,
+        backgroundColor: "transparent",
+        borderRadius: 10,
+    }
   },
 });
