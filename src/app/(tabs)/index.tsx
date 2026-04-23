@@ -1,14 +1,14 @@
+import CopyButton from '@/components/CopyButton';
 import HomeHeader from '@/components/HomeHeader';
 import MacroGrid from '@/components/MacroGrid';
 import RecentMeals from '@/components/RecentMeals';
+import ReminderToggle from '@/components/ReminderToggle';
+import ShareButton from '@/components/ShareButton';
 import { getMeals, Meal } from '@/storage/meals';
 import { globalStyles } from '@/styles/global';
 import { useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { ScrollView, View, Text, Platform } from 'react-native';
-import ShareButton from '@/components/ShareButton';
-import CopyButton from '@/components/CopyButton';
-// import ReminderToggle from '@/components/ReminderToggle';
+import { Platform, ScrollView, Text, View } from 'react-native';
 
 export default function HomeScreen() {
   const [meals, setMeals] = useState<Meal[]>([]);
@@ -16,7 +16,6 @@ export default function HomeScreen() {
   const loadMeals = async () => {
     const data = await getMeals();
     setMeals(data);
-//     console.log('Loaded meals:', data);
   };
 
   // Reload meals whenever the screen is focused
