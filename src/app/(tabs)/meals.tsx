@@ -4,7 +4,7 @@ import { clearAllMeals, getMeals, Meal, MealOptions, MealType } from '@/storage/
 import { globalStyles } from '@/styles/global';
 import { useFocusEffect } from 'expo-router';
 import { useCallback, useMemo, useState } from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
 export default function AllMealsScreen() {
   const [meals, setMeals] = useState<Meal[]>([]);
@@ -15,8 +15,17 @@ export default function AllMealsScreen() {
   }, []);
 
   const handleClearAll = async () => {
-    await clearAllMeals();
-    loadMeals();
+    Alert.alert('Clear All Meals', 'Are you sure you want to clear all meals?', [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Clear All',
+        style: 'destructive',
+        onPress: async () => {
+          await clearAllMeals();
+          loadMeals();
+        },
+      },
+    ]);
   };
 
   useFocusEffect(
