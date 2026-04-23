@@ -1,5 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+export type MealType = 'Breakfast' | 'Lunch' | 'Dinner' | 'Snack';
+export const MealOptions: MealType[] = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
+
 export type Meal = {
   id: string;
   name: string;
@@ -7,7 +10,7 @@ export type Meal = {
   protein: number;
   carbs: number;
   fat: number;
-  type: 'Breakfast' | 'Lunch' | 'Dinner' | 'Snack';
+  type: MealType;
   createdAt: string;
 };
 
