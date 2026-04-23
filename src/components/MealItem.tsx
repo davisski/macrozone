@@ -1,8 +1,8 @@
-import { Alert, StyleSheet, Text, View, TouchableOpacity, Pressable } from 'react-native';
 import { deleteMeal } from '@/storage/meals';
 import { colors } from '@/styles/global';
-import { useRouter } from 'expo-router';
 import Entypo from '@expo/vector-icons/Entypo';
+import { useRouter } from 'expo-router';
+import { Alert, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import * as Haptics from 'expo-haptics';
 
@@ -48,7 +48,7 @@ export default function MealItem({
     <TouchableOpacity style={styles.container} onLongPress={handleLongPress}>
         <View style={{flex:1, flexDirection:'row', justifyContent:'space-between', alignItems:'center'}}>
             <View style={{ flex: 1, flexFlow: 'column' }}>
-                <Text style={styles.name}>{name} - {type}</Text>
+                <Text style={styles.name}>{type} - {name}</Text>
 
                 <Text style={styles.macros}>
                     {calories} cal • {protein}g P • {carbs}g C • {fat}g F
