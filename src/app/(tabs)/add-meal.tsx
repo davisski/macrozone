@@ -1,10 +1,10 @@
-import { addMeal, findMealById, updateMeal } from '@/storage/meals';
+import { addMeal, findMealById, MealOptions, updateMeal } from '@/storage/meals';
 import { colors, globalStyles } from '@/styles/global';
-import { useRouter, useFocusEffect, useLocalSearchParams } from 'expo-router';
-import {  useCallback, useState } from 'react';
-import { Platform } from 'react-native';
-import {Picker} from '@react-native-picker/picker';
+import { Picker } from '@react-native-picker/picker';
 import * as Haptics from 'expo-haptics';
+import { useFocusEffect, useLocalSearchParams, useRouter } from 'expo-router';
+import { useState } from 'react';
+import { Platform } from 'react-native';
 
 import {
   Alert,
@@ -21,11 +21,9 @@ export default function AddMealScreen() {
   const [protein, setProtein] = useState('');
   const [carbs, setCarbs] = useState('');
   const [fat, setFat] = useState('');
-  const [meals, setMeals] = useState('');
   const { mealId } = useLocalSearchParams();
   const [selectedType, setSelectedType] = useState(null);
   const isEditing = !!mealId && mealId !== 'null';
-  const TYPES = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
 
   const router = useRouter();
   const resetForm = () => {
@@ -129,7 +127,7 @@ export default function AddMealScreen() {
                   style={styles.dropdown.item}
                   color={Platform.OS === "android" ? "#a0a0b0" : undefined}
                 />
-                  {TYPES.map((opt) => (
+                  {MealOptions.map((opt) => (
                     <Picker.Item
                       key={opt}
                       label={opt}
