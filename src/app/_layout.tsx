@@ -1,7 +1,8 @@
+import { useStore } from '@/storage/store';
 import { Stack } from 'expo-router';
 
 export default function RootLayout() {
-  const isAuthenticated = false;
+  const { isAuthenticated } = useStore();
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Protected guard={isAuthenticated}>
