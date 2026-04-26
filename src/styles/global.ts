@@ -38,4 +38,50 @@ export const globalStyles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  center:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  auth:{
+    width: '80%',
+    backgroundColor: colors.surface,
+    padding: 20,
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 5,
+    color: colors.text,
+  },
+  input:{
+    backgroundColor: colors.background,
+    color: colors.text,
+    padding: 16,
+    borderRadius: 10,
+    fontSize: 16,
+    marginTop: 16,
+  },
+  button: {
+    backgroundColor: colors.primary,
+    padding: 16,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginTop: 24,
+  },
+  buttonText: {
+    color: colors.background,
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  text: {
+    color: colors.textSecondary,
+    fontSize: 14,
+    marginTop: 12,
+  },
+  link: {
+    color: colors.primary,
+    fontSize: 14,
+  },
 });
